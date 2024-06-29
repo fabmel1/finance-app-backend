@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
 const usersRoutes = require('./routes/users');
 const transactionsRoutes = require('./routes/transactions');
+const obligationsRoutes = require('./routes/obligations');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 // Rutas
 app.use('/users', usersRoutes);
 app.use('/transactions', transactionsRoutes);
+app.use('/obligations', obligationsRoutes);
 
 // Sincronizar la base de datos y empezar el servidor
 sequelize.sync().then(() => {
