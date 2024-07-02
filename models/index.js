@@ -8,6 +8,7 @@ const Transaction = require('./transaction');
 const Obligation = require('./obligation');
 const TransactionType = require('./transactionType');
 const Budget = require('./budget');
+const ThirdParty = require('./thirdParty');
 
 // Definir relaciones
 User.hasOne(UserDetail, { foreignKey: 'id_user' });
@@ -25,6 +26,13 @@ Transaction.belongsTo(TransactionType, { foreignKey: 'id_transaction_type' });
 Budget.hasMany(Transaction, { foreignKey: 'id_budget' }); 
 Transaction.belongsTo(Budget, { foreignKey: 'id_budget' }); 
 
+ThirdParty.hasMany(Transaction, { foreignKey: 'id_third_party' }); 
+Transaction.belongsTo(ThirdParty, { foreignKey: 'id_third_party' }); 
+
+Obligation.hasMany(Transaction, { foreignKey: 'id_obligation', allowNull: true }); // optional relationhip
+Transaction.belongsTo(Obligation, { foreignKey: 'id_obligation', allowNull: true }); // optional relationhip
+
+
 // Sincronizar la base de datos
 sequelize.sync().then(() => {
     console.log('Database & tables created!');
@@ -38,5 +46,6 @@ module.exports = {
     Transaction,
     Obligation,
     TransactionType,
-    Budget
+    Budget,
+    ThirdParty
 };

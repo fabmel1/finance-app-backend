@@ -9,7 +9,11 @@ const Transaction = sequelize.define('Transaction', {
     },
     id_transaction_type: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'TransactionTypes',
+            key: 'id_transaction_type'
+        }
     },
     amount: {
         type: DataTypes.FLOAT,
@@ -33,7 +37,11 @@ const Transaction = sequelize.define('Transaction', {
     },
     id_budget: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: false,
+        references: {
+            model: 'budget',
+            key: 'id_budget'
+        }
     },
     id_account: {
         type: DataTypes.INTEGER,
@@ -41,15 +49,27 @@ const Transaction = sequelize.define('Transaction', {
     },
     id_obligation: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'obligation',
+            key: 'id_obligation'
+        }
     },
     id_user: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'user',
+            key: 'id_user'
+        }
     },
     id_third_party: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'thirdParty',
+            key: 'id_third_party'
+        }
     }
 });
 
