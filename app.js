@@ -4,6 +4,10 @@ const sequelize = require('./config/database');
 const usersRoutes = require('./routes/users');
 const transactionsRoutes = require('./routes/transactions');
 const obligationsRoutes = require('./routes/obligations');
+const transactionTypesRoutes = require('./routes/transactionTypes');
+const budgetsRoutes = require('./routes/budgets.js');
+const userDetailsRoutes = require('./routes/userDetails');
+const thirdPartiesRoutes = require('./routes/thirdParties'); 
 
 const app = express();
 
@@ -14,6 +18,10 @@ app.use(bodyParser.json());
 app.use('/users', usersRoutes);
 app.use('/transactions', transactionsRoutes);
 app.use('/obligations', obligationsRoutes);
+app.use('/transactionTypes', transactionTypesRoutes);
+app.use('/budgets', budgetsRoutes);
+app.use('/userDetails', userDetailsRoutes); 
+app.use('/thirdParties', thirdPartiesRoutes);
 
 // Sincronizar la base de datos y empezar el servidor
 sequelize.sync().then(() => {

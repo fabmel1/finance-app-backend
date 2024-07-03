@@ -9,7 +9,11 @@ const UserDetail = sequelize.define('UserDetail', {
     },
     id_user: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'Users',
+            key: 'id_user'
+        }
     },
     user_name: {
         type: DataTypes.STRING,
