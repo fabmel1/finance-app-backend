@@ -13,7 +13,8 @@ const UserDetail = sequelize.define('UserDetail', {
         references: {
             model: 'Users',
             key: 'id_user'
-        }
+        },
+        onDelete: 'CASCADE'
     },
     user_name: {
         type: DataTypes.STRING,
