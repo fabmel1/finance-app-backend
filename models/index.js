@@ -13,6 +13,7 @@ const Subcategory = require('./subcategory');
 const Category = require('./category');
 const InstitutionType = require('./institutionType');
 const Institution = require('./institution');
+const CreditCard = require('./creditCard');
 const ThirdParty = require('./thirdParty');
 
 // Definir relaciones
@@ -49,6 +50,15 @@ Subcategory.belongsTo(Category, { foreignKey: 'id_category' });
 InstitutionType.hasMany(Institution, { foreignKey: 'id_institution_type' });
 Institution.belongsTo(InstitutionType, { foreignKey: 'id_institution_type' });
 
+User.hasMany(CreditCard, { foreignKey: 'id_user' });
+CreditCard.belongsTo(User, { foreignKey: 'id_user' });
+
+Institution.hasMany(CreditCard, { foreignKey: 'id_institution' });
+CreditCard.belongsTo(Institution, { foreignKey: 'id_institution' });
+
+CreditCard.hasMany(Transaction, { foreignKey: 'id_credit_card', allowNull: true });
+Transaction.belongsTo(CreditCard, { foreignKey: 'id_credit_card', allowNull: true });
+
 // Sincronizar la base de datos
 sequelize.sync().then(() => {
     console.log('Database & tables created!');
@@ -68,5 +78,6 @@ module.exports = {
     Category,
     InstitutionType,
     Institution,    
+    CreditCard,    
     ThirdParty
 };

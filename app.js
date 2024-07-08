@@ -11,6 +11,7 @@ const subcategoriesRoutes = require('./routes/subcategories');
 const categoriesRoutes = require('./routes/categories');
 const institutionTypeRoutes = require('./routes/institutionTypes')
 const institutionsRoutes = require('./routes/institutions');
+const creditCardsRoutes = require('./routes/creditCards');
 const userDetailsRoutes = require('./routes/userDetails');
 const thirdPartiesRoutes = require('./routes/thirdParties'); 
 
@@ -30,6 +31,7 @@ app.use('/subcategories', subcategoriesRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/institutionTypes', institutionTypeRoutes);
 app.use('/institutions', institutionsRoutes);
+app.use('/creditCards', creditCardsRoutes);
 app.use('/userDetails', userDetailsRoutes); 
 app.use('/thirdParties', thirdPartiesRoutes);
 
