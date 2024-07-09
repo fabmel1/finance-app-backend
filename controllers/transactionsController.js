@@ -58,6 +58,15 @@ exports.createTransaction = async (req, res) => {
             }
         }
 
+        // Verificar si la credit card existe (si se proporciona)
+        let creditCard = null;
+        if (id_credit_card) {
+            creditCard = await CreditCard.findByPk(id_credit_card);
+            if (!creditCard) {
+                return res.status(404).json({ error: 'Credit card not found' });
+            }
+        }
+
         // Crear una transacción asociada al usuario y a las demás relaciones
         const transaction = await user.createTransaction({ 
             id_transaction_type,
@@ -71,6 +80,13 @@ exports.createTransaction = async (req, res) => {
             id_obligation,
             id_third_party: thirdParty ? thirdParty.id_third_party : null
         });
+
+        // Actualizar el balance de la tarjeta de crédito si está presente
+        if (creditCard) {
+            creditCard.balance += amount;
+            await creditCard.save();
+        }
+                
         res.status(201).json(transaction);
     } catch (error) {
         res.status(400).json({ error: error.message });

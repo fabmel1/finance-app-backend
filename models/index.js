@@ -13,6 +13,11 @@ const Subcategory = require('./subcategory');
 const Category = require('./category');
 const InstitutionType = require('./institutionType');
 const Institution = require('./institution');
+const CreditCard = require('./creditCard');
+const Currency = require('./currency');
+const Goal = require('./goal');
+const AccountType = require('./accountType');
+const Account = require('./account');
 const ThirdParty = require('./thirdParty');
 
 // Definir relaciones
@@ -49,6 +54,30 @@ Subcategory.belongsTo(Category, { foreignKey: 'id_category' });
 InstitutionType.hasMany(Institution, { foreignKey: 'id_institution_type' });
 Institution.belongsTo(InstitutionType, { foreignKey: 'id_institution_type' });
 
+User.hasMany(CreditCard, { foreignKey: 'id_user' });
+CreditCard.belongsTo(User, { foreignKey: 'id_user' });
+
+Institution.hasMany(CreditCard, { foreignKey: 'id_institution' });
+CreditCard.belongsTo(Institution, { foreignKey: 'id_institution' });
+
+CreditCard.hasMany(Transaction, { foreignKey: 'id_credit_card', allowNull: true });
+Transaction.belongsTo(CreditCard, { foreignKey: 'id_credit_card', allowNull: true });
+
+Currency.hasMany(Goal, { foreignKey: 'id_currency' });
+Goal.belongsTo(Currency, { foreignKey: 'id_currency' });
+
+AccountType.hasMany(Account, { foreignKey: 'id_account_type' });
+Account.belongsTo(AccountType, { foreignKey: 'id_account_type' });
+
+Institution.hasMany(Account, { foreignKey: 'id_institution' });
+Account.belongsTo(Institution, { foreignKey: 'id_institution' });
+
+Currency.hasMany(Account, { foreignKey: 'id_currency' });
+Account.belongsTo(Currency, { foreignKey: 'id_currency' });
+
+Goal.hasMany(Account, { foreignKey: 'id_goal', allowNull: true });
+Account.belongsTo(Goal, { foreignKey: 'id_goal', allowNull: true });
+
 // Sincronizar la base de datos
 sequelize.sync().then(() => {
     console.log('Database & tables created!');
@@ -68,5 +97,10 @@ module.exports = {
     Category,
     InstitutionType,
     Institution,    
+    CreditCard,
+    Currency,
+    Goal,
+    AccountType,
+    Account,
     ThirdParty
 };

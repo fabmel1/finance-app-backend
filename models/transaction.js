@@ -33,7 +33,11 @@ const Transaction = sequelize.define('Transaction', {
     },
     id_credit_card: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'CreditCards',
+            key: 'id_credit_card'
+        }
     },
     id_budget: {
         type: DataTypes.INTEGER,
