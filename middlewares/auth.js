@@ -1,17 +1,14 @@
 const jwt = require('jsonwebtoken');
 
-const authenticate = (req, res, next) => {
+module.exports = (req, res, next) => {
     const authHeader = req.headers['authorization'];
-    if (!authHeader) return res.sendStatus(401);
+    const token = authHeader && authHeader.split(' ')[1];
 
-    const token = authHeader.split(' ')[1];
-    if (!token) return res.sendStatus(401);
+    if (token == null) return res.sendStatus(401);
 
     jwt.verify(token, 'secretkey', (err, user) => {
         if (err) return res.sendStatus(403);
-        req.userId = user.id_user;
+        req.userId = user.userId;
         next();
     });
 };
-
-module.exports = authenticate;

@@ -24,23 +24,29 @@ const ThirdParty = require('./thirdParty');
 User.hasOne(UserDetail, { foreignKey: 'id_user', onDelete: 'CASCADE' });
 UserDetail.belongsTo(User, { foreignKey: 'id_user' });
 
-User.hasMany(Transaction, { foreignKey: 'id_user' });
-Transaction.belongsTo(User, { foreignKey: 'id_user' });
-
 User.hasMany(Obligation, { foreignKey: 'id_user' });
 Obligation.belongsTo(User, { foreignKey: 'id_user' });
 
 TransactionType.hasMany(Transaction, { foreignKey: 'id_transaction_type' });
 Transaction.belongsTo(TransactionType, { foreignKey: 'id_transaction_type' });
 
+CreditCard.hasMany(Transaction, { foreignKey: 'id_credit_card', allowNull: true });
+Transaction.belongsTo(CreditCard, { foreignKey: 'id_credit_card', allowNull: true });
+
 Budget.hasMany(Transaction, { foreignKey: 'id_budget' });
 Transaction.belongsTo(Budget, { foreignKey: 'id_budget' });
 
-ThirdParty.hasMany(Transaction, { foreignKey: 'id_third_party' });
-Transaction.belongsTo(ThirdParty, { foreignKey: 'id_third_party' });
+Account.hasMany(Transaction, { foreignKey: 'id_account' });
+Transaction.belongsTo(Account, { foreignKey: 'id_account' });
 
 Obligation.hasMany(Transaction, { foreignKey: 'id_obligation', allowNull: true });
 Transaction.belongsTo(Obligation, { foreignKey: 'id_obligation', allowNull: true });
+
+User.hasMany(Transaction, { foreignKey: 'id_user' });
+Transaction.belongsTo(User, { foreignKey: 'id_user' });
+
+ThirdParty.hasMany(Transaction, { foreignKey: 'id_third_party' });
+Transaction.belongsTo(ThirdParty, { foreignKey: 'id_third_party' });
 
 Budget.hasMany(BudgetDetail, { foreignKey: 'id_budget' });
 BudgetDetail.belongsTo(Budget, { foreignKey: 'id_budget' });
@@ -59,9 +65,6 @@ CreditCard.belongsTo(User, { foreignKey: 'id_user' });
 
 Institution.hasMany(CreditCard, { foreignKey: 'id_institution' });
 CreditCard.belongsTo(Institution, { foreignKey: 'id_institution' });
-
-CreditCard.hasMany(Transaction, { foreignKey: 'id_credit_card', allowNull: true });
-Transaction.belongsTo(CreditCard, { foreignKey: 'id_credit_card', allowNull: true });
 
 Currency.hasMany(Goal, { foreignKey: 'id_currency' });
 Goal.belongsTo(Currency, { foreignKey: 'id_currency' });

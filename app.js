@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
+
+//Import routes
 const usersRoutes = require('./routes/users');
 const transactionsRoutes = require('./routes/transactions');
 const obligationsRoutes = require('./routes/obligations');
