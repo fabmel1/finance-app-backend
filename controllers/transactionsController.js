@@ -1,4 +1,4 @@
-const { Transaction, User, ThirdParty, TransactionType, Budget, Obligation } = require('../models');
+const { Transaction, User, ThirdParty, TransactionType, Budget, Obligation, CreditCard, Account } = require('../models');
 
 exports.createTransaction = async (req, res) => {
     try {
@@ -7,7 +7,6 @@ exports.createTransaction = async (req, res) => {
             amount,
             date_transaction,
             description,
-            id_subcategory,
             id_credit_card,
             id_budget,
             id_account,
@@ -16,6 +15,8 @@ exports.createTransaction = async (req, res) => {
             third_party_name,
             third_party_description
         } = req.body;
+
+        console.log('User ID:', req.userId);
 
         const user = await User.findByPk(req.userId);
         if (!user) {
@@ -67,13 +68,21 @@ exports.createTransaction = async (req, res) => {
             }
         }
 
+        // Verificar si la account existe (si se proporciona)
+        let account = null;
+        if (id_account) {
+            account = await Account.findByPk(id_account);
+            if (!account) {
+                return res.status(404).json({ error: 'Account not found' });
+            }
+        }
+
         // Crear una transacción asociada al usuario y a las demás relaciones
         const transaction = await user.createTransaction({ 
             id_transaction_type,
             amount,
             date_transaction,
             description,
-            id_subcategory,
             id_credit_card,
             id_budget,
             id_account,
@@ -85,6 +94,12 @@ exports.createTransaction = async (req, res) => {
         if (creditCard) {
             creditCard.balance += amount;
             await creditCard.save();
+        }
+
+        // Actualizar el balance de la cuenta si está presente
+        if (account) {
+            account.balance += amount;
+            await account.save();
         }
                 
         res.status(201).json(transaction);
@@ -101,7 +116,7 @@ exports.getTransactions = async (req, res) => {
         }
         const transactions = await Transaction.findAll({
             where: { id_user: req.userId },
-            include: [ThirdParty, TransactionType, Budget, Obligation]
+            include: [ThirdParty, TransactionType, Budget, Obligation, CreditCard, Account] // Incluir CreditCard y Account
         });
         res.json(transactions);
     } catch (error) {
