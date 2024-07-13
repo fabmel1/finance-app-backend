@@ -4,6 +4,8 @@ const sequelize = require('./config/database');
 
 //Import routes
 const usersRoutes = require('./routes/users');
+const userDetailsRoutes = require('./routes/userDetails');
+const familiesRoutes = require('./routes/families');
 const transactionsRoutes = require('./routes/transactions');
 const obligationsRoutes = require('./routes/obligations');
 const transactionTypesRoutes = require('./routes/transactionTypes');
@@ -14,7 +16,6 @@ const categoriesRoutes = require('./routes/categories');
 const institutionTypeRoutes = require('./routes/institutionTypes')
 const institutionsRoutes = require('./routes/institutions');
 const creditCardsRoutes = require('./routes/creditCards');
-const userDetailsRoutes = require('./routes/userDetails');
 const currenciesRoutes = require('./routes/currencies');
 const goalsRoutes = require('./routes/goals');
 const accountTypesRoutes = require('./routes/accountTypes');
@@ -28,6 +29,8 @@ app.use(bodyParser.json());
 
 // Rutas
 app.use('/users', usersRoutes);
+app.use('/userDetails', userDetailsRoutes);
+app.use('/families', familiesRoutes);
 app.use('/transactions', transactionsRoutes);
 app.use('/obligations', obligationsRoutes);
 app.use('/transactionTypes', transactionTypesRoutes);
@@ -38,7 +41,6 @@ app.use('/categories', categoriesRoutes);
 app.use('/institutionTypes', institutionTypeRoutes);
 app.use('/institutions', institutionsRoutes);
 app.use('/creditCards', creditCardsRoutes);
-app.use('/userDetails', userDetailsRoutes);
 app.use('/currencies', currenciesRoutes);
 app.use('/goals', goalsRoutes);
 app.use('/accountTypes', accountTypesRoutes);
