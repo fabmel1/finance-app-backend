@@ -2,18 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
 
-//Import routes
+// Import routes
 const usersRoutes = require('./routes/users');
 const userDetailsRoutes = require('./routes/userDetails');
 const familiesRoutes = require('./routes/families');
 const transactionsRoutes = require('./routes/transactions');
 const obligationsRoutes = require('./routes/obligations');
 const transactionTypesRoutes = require('./routes/transactionTypes');
-const budgetsRoutes = require('./routes/budgets.js');
+const budgetsRoutes = require('./routes/budgets');
 const budgetDetailsRoutes = require('./routes/budgetDetails');
 const subcategoriesRoutes = require('./routes/subcategories');
 const categoriesRoutes = require('./routes/categories');
-const institutionTypeRoutes = require('./routes/institutionTypes')
+const institutionTypeRoutes = require('./routes/institutionTypes');
 const institutionsRoutes = require('./routes/institutions');
 const creditCardsRoutes = require('./routes/creditCards');
 const currenciesRoutes = require('./routes/currencies');

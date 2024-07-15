@@ -26,12 +26,7 @@ const UserDetail = sequelize.define('UserDetail', {
     },
     id_family: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'Family',
-            key: 'id_family'
-        },
-        onDelete: 'CASCADE'
+        allowNull: false
     },   
     relationship: {
         type: DataTypes.STRING,
