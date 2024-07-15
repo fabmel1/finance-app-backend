@@ -4,6 +4,7 @@ const sequelize = require('../config/database');
 // Importar modelos
 const User = require('./user');
 const UserDetail = require('./userDetail');
+const Family = require('./family');
 const Transaction = require('./transaction');
 const Obligation = require('./obligation');
 const TransactionType = require('./transactionType');
@@ -23,6 +24,9 @@ const ThirdParty = require('./thirdParty');
 // Definir relaciones
 User.hasOne(UserDetail, { foreignKey: 'id_user', onDelete: 'CASCADE' });
 UserDetail.belongsTo(User, { foreignKey: 'id_user' });
+
+Family.hasMany(UserDetail, { foreignKey: 'id_family' });
+UserDetail.belongsTo(Family, { foreignKey: 'id_family' });
 
 User.hasMany(Obligation, { foreignKey: 'id_user' });
 Obligation.belongsTo(User, { foreignKey: 'id_user' });
@@ -91,6 +95,7 @@ sequelize.sync().then(() => {
 module.exports = {
     User,
     UserDetail,
+    Family,
     Transaction,
     Obligation,
     TransactionType,

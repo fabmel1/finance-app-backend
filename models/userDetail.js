@@ -11,7 +11,7 @@ const UserDetail = sequelize.define('UserDetail', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Users',
+            model: 'User',
             key: 'id_user'
         },
         onDelete: 'CASCADE'
@@ -23,7 +23,15 @@ const UserDetail = sequelize.define('UserDetail', {
     age: {
         type: DataTypes.INTEGER,
         allowNull: false
-    }
+    },
+    id_family: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },   
+    relationship: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }     
 });
 
 module.exports = UserDetail;
