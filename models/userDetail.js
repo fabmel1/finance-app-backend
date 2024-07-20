@@ -26,12 +26,20 @@ const UserDetail = sequelize.define('UserDetail', {
     },
     id_family: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    },   
+        allowNull: false,
+        references: {
+            model: 'Family',
+            key: 'id_family'
+        }
+    },
     relationship: {
         type: DataTypes.STRING,
         allowNull: false
-    }     
+    }
+}, {
+    timestamps: true,
+    tableName: 'UserDetail',
+    freezeTableName: true
 });
 
 module.exports = UserDetail;

@@ -2,53 +2,39 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
 
-// Import routes
+// Importar rutas de administrador
+const adminRoutes = require('./routes/admin'); 
+
+// Importar otras rutas
 const usersRoutes = require('./routes/users');
 const userDetailsRoutes = require('./routes/userDetails');
 const familiesRoutes = require('./routes/families');
-const transactionsRoutes = require('./routes/transactions');
-const obligationsRoutes = require('./routes/obligations');
-const transactionTypesRoutes = require('./routes/transactionTypes');
-const budgetsRoutes = require('./routes/budgets');
-const budgetDetailsRoutes = require('./routes/budgetDetails');
-const subcategoriesRoutes = require('./routes/subcategories');
-const categoriesRoutes = require('./routes/categories');
-const institutionTypeRoutes = require('./routes/institutionTypes');
+const notificationsRoutes = require('./routes/notifications');
+const bankSMSRoutes = require('./routes/banksSMS');
 const institutionsRoutes = require('./routes/institutions');
+const institutionTypesRoutes = require('./routes/institutionTypes');
 const creditCardsRoutes = require('./routes/creditCards');
-const currenciesRoutes = require('./routes/currencies');
-const goalsRoutes = require('./routes/goals');
-const accountTypesRoutes = require('./routes/accountTypes');
-const accountsRoutes = require('./routes/accounts');
-const thirdPartiesRoutes = require('./routes/thirdParties'); 
 
 const app = express();
 
 // Middleware para parsear el cuerpo de las solicitudes
 app.use(bodyParser.json());
 
-// Rutas
+// Rutas administrador
+app.use('/admin', adminRoutes);
+
+// Otras rutas
 app.use('/users', usersRoutes);
 app.use('/userDetails', userDetailsRoutes);
 app.use('/families', familiesRoutes);
-app.use('/transactions', transactionsRoutes);
-app.use('/obligations', obligationsRoutes);
-app.use('/transactionTypes', transactionTypesRoutes);
-app.use('/budgets', budgetsRoutes);
-app.use('/budgetDetails', budgetDetailsRoutes);
-app.use('/subcategories', subcategoriesRoutes);
-app.use('/categories', categoriesRoutes);
-app.use('/institutionTypes', institutionTypeRoutes);
+app.use('/notifications', notificationsRoutes);
+app.use('/banksSMS', bankSMSRoutes);
 app.use('/institutions', institutionsRoutes);
+app.use('/institutionTypes', institutionTypesRoutes);
 app.use('/creditCards', creditCardsRoutes);
-app.use('/currencies', currenciesRoutes);
-app.use('/goals', goalsRoutes);
-app.use('/accountTypes', accountTypesRoutes);
-app.use('/accounts', accountsRoutes);
-app.use('/thirdParties', thirdPartiesRoutes);
 
 // Sincronizar la base de datos y empezar el servidor
-sequelize.sync().then(() => {
+sequelize.sync( {force: true} ).then(() => {
     app.listen(3000, () => {
         console.log('Server is running on http://localhost:3000');
     });
