@@ -2,7 +2,7 @@ const { CreditCard, User, Institution, Transaction } = require('../models');
 
 exports.createCreditCard = async (req, res) => {
     try {
-        const { credit_card_name, credit_card_limit, balance, id_user, id_institution } = req.body;
+        const { credit_card_name, balance, credit_card_limit, id_institution, id_user } = req.body;
         const user = await User.findByPk(id_user);
         const institution = await Institution.findByPk(id_institution);
 
@@ -12,10 +12,11 @@ exports.createCreditCard = async (req, res) => {
 
         const creditCard = await CreditCard.create({
             credit_card_name,
-            credit_card_limit,
             balance,
-            id_user,
-            id_institution
+            credit_card_limit,
+            id_institution,
+            id_user
+            
         });
 
         res.status(201).json(creditCard);

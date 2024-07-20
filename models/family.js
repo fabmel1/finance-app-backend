@@ -11,6 +11,10 @@ const Family = sequelize.define('Family', {
         type: DataTypes.STRING,
         allowNull: false
     }
+}, {
+    timestamps: true,
+    tableName: 'Family', 
+    freezeTableName: true
 });
 
 module.exports = Family;

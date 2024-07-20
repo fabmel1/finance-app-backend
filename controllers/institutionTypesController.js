@@ -1,10 +1,10 @@
 const { InstitutionType } = require('../models');
 
-exports.createInstitutionType = async (req, res) => {
+exports.createInstitutionTypes = async (req, res) => {
     try {
-        const { institution_type_name } = req.body;
-        const institutionType = await InstitutionType.create({ institution_type_name });
-        res.status(201).json(institutionType);
+        const institutionTypes = req.body;
+        const createdInstitutionTypes = await InstitutionType.bulkCreate(institutionTypes);
+        res.status(201).json(createdInstitutionTypes);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

@@ -15,10 +15,14 @@ const Institution = sequelize.define('Institution', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'InstitutionTypes',
+            model: 'InstitutionType',
             key: 'id_institution_type'
         }
     }
+}, {
+    timestamps: true,
+    tableName: 'Institution',
+    freezeTableName: true 
 });
 
 module.exports = Institution;
