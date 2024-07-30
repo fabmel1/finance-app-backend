@@ -43,7 +43,7 @@ const Account = sequelize.define('Account', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'AccountTypes',
+            model: 'AccountType',
             key: 'id_account_type'
         }
     },
@@ -51,7 +51,7 @@ const Account = sequelize.define('Account', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Institutions',
+            model: 'Institution',
             key: 'id_institution'
         }
     },
@@ -59,7 +59,7 @@ const Account = sequelize.define('Account', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Currencies',
+            model: 'Currency',
             key: 'id_currency'
         }
     },
@@ -67,10 +67,14 @@ const Account = sequelize.define('Account', {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-            model: 'Goals',
+            model: 'Goal',
             key: 'id_goal'
         }
     }
+}, {
+    timestamps: true,
+    tableName: 'Account',
+    freezeTableName: true
 });
 
 module.exports = Account;

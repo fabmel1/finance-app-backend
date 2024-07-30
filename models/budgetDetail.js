@@ -19,7 +19,7 @@ const BudgetDetail = sequelize.define('BudgetDetail', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Subcategories',
+            model: 'Subcategory',
             key: 'id_subcategory'
         }
     },

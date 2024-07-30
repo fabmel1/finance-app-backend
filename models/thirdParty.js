@@ -19,6 +19,10 @@ const ThirdParty = sequelize.define('ThirdParty', {
         type: DataTypes.STRING,
         allowNull: true
     }
+}, {
+    timestamps: true,
+    tableName: 'ThirdParty',
+    freezeTableName: true
 });
 
 module.exports = ThirdParty;

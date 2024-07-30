@@ -25,8 +25,20 @@ const Obligation = sequelize.define('Obligation', {
     },
     id_user: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+         references: {
+            model: 'User', 
+            key: 'id_user'
+        }
+    },
+    system_default: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
+}, {
+    timestamps: true,
+    tableName: 'Obligation',
+    freezeTableName: true
 });
 
 module.exports = Obligation;

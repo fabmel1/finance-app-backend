@@ -11,7 +11,7 @@ const Transaction = sequelize.define('Transaction', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'TransactionTypes',
+            model: 'TransactionType',
             key: 'id_transaction_type'
         }
     },
@@ -29,17 +29,13 @@ const Transaction = sequelize.define('Transaction', {
     },
     id_credit_card: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'CreditCards',
-            key: 'id_credit_card'
-        }
+        allowNull: true
     },
     id_budget: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'budget',
+            model: 'Budget',
             key: 'id_budget'
         }
     },
@@ -47,23 +43,19 @@ const Transaction = sequelize.define('Transaction', {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-            model: 'Accounts',
+            model: 'Account',
             key: 'id_account'
         }
     },
     id_obligation: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'obligation',
-            key: 'id_obligation'
-        }
+        allowNull: true
     },
     id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'user',
+            model: 'User',
             key: 'id_user'
         }
     },
@@ -71,10 +63,14 @@ const Transaction = sequelize.define('Transaction', {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-            model: 'thirdParty',
+            model: 'ThirdParty',
             key: 'id_third_party'
         }
     }
+}, {
+    timestamps: true,
+    tableName: 'Transaction',
+    freezeTableName: true
 });
 
 module.exports = Transaction;

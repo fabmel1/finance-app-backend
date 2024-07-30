@@ -15,10 +15,18 @@ const Subcategory = sequelize.define('Subcategory', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Categories', 
+            model: 'Category', 
             key: 'id_category'
         }
+    },
+    system_default: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
+}, {
+    timestamps: true,
+    tableName: 'Subcategory',
+    freezeTableName: true
 });
 
 module.exports = Subcategory;
