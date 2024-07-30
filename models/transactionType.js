@@ -14,7 +14,15 @@ const TransactionType = sequelize.define('TransactionType', {
     transaction_type_address: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    system_default: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
+}, {
+    timestamps: true,
+    tableName: 'TransactionType',
+    freezeTableName: true
 });
 
 module.exports = TransactionType;

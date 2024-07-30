@@ -8,6 +8,16 @@ const BankSMS = require('./bankSMS');
 const InstitutionType = require('./institutionType');
 const Institution = require('./institution');
 const CreditCard = require('./creditCard');
+const Category = require('./category');
+const Subcategory = require('./subcategory');
+const TransactionType = require('./transactionType');
+const Obligation = require('./obligation');
+const Currency = require('./currency');
+const Country = require('./country');
+const ThirdParty = require('./thirdParty')
+const Transaction = require('./transaction');
+
+
 
 // Definir relaciones
 User.hasOne(UserDetail, { foreignKey: 'id_user', onDelete: 'CASCADE' });
@@ -18,6 +28,9 @@ UserDetail.belongsTo(Family, { foreignKey: 'id_family' });
 
 User.hasMany(Notification, { foreignKey: 'id_user' });
 Notification.belongsTo(User, { foreignKey: 'id_user' });
+
+User.hasMany(Obligation, { foreignKey: 'id_user' });
+Obligation.belongsTo(User, { foreignKey: 'id_user' });
 
 User.hasMany(BankSMS, { foreignKey: 'id_user' });
 BankSMS.belongsTo(User, { foreignKey: 'id_user' });
@@ -31,6 +44,21 @@ CreditCard.belongsTo(Institution, { foreignKey: 'id_institution' });
 User.hasMany(CreditCard, { foreignKey: 'id_user' });
 CreditCard.belongsTo(User, { foreignKey: 'id_user' });
 
+Category.hasMany(Subcategory, { foreignKey: 'id_category' });
+Subcategory.belongsTo(Category, { foreignKey: 'id_category' });
+
+Subcategory.hasMany(Obligation, { foreignKey: 'id_subcategory' });
+Obligation.belongsTo(Subcategory, { foreignKey: 'id_subcategory' });
+
+TransactionType.hasMany(Transaction, { foreignKey: 'id_transaction_type' });
+Transaction.belongsTo(TransactionType, { foreignKey: 'id_transaction_type' });
+
+Country.hasMany(Currency, { foreignKey: 'id_country' });
+Currency.belongsTo(Country, { foreignKey: 'id_country' });
+
+ThirdParty.hasMany(Transaction, { foreignKey: 'id_third_party' });
+Transaction.belongsTo(ThirdParty, { foreignKey: 'id_third_party' });
+
 
 // Sincronizar la base de datos
 sequelize.sync().then(() => {
@@ -40,6 +68,7 @@ sequelize.sync().then(() => {
 });
 
 module.exports = {
+    sequelize,
     User,
     UserDetail,
     Family,
@@ -47,5 +76,13 @@ module.exports = {
     BankSMS,
     InstitutionType,
     Institution,
-    CreditCard
+    CreditCard,
+    Category,
+    Subcategory,
+    TransactionType,
+    Obligation,
+    Currency,
+    Country,
+    ThirdParty,
+    Transaction
 };

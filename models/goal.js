@@ -33,10 +33,14 @@ const Goal = sequelize.define('Goal', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Currencies',
+            model: 'Currency',
             key: 'id_currency'
         }
     }
+}, {
+    timestamps: true,
+    tableName: 'Goal',
+    freezeTableName: true
 });
 
 module.exports = Goal;

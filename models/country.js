@@ -1,24 +1,20 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const AccountType = sequelize.define('AccountType', {
-    id_account_type: {
+const Country = sequelize.define('Country', {
+    id_country: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    account_type_name: {
+    country_name: {
         type: DataTypes.STRING,
         allowNull: false
-    },    
-    system_default: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
     }
 }, {
     timestamps: true,
-    tableName: 'AccountType',
+    tableName: 'Country',
     freezeTableName: true
 });
 
-module.exports = AccountType;
+module.exports = Country;

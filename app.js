@@ -14,6 +14,13 @@ const bankSMSRoutes = require('./routes/banksSMS');
 const institutionsRoutes = require('./routes/institutions');
 const institutionTypesRoutes = require('./routes/institutionTypes');
 const creditCardsRoutes = require('./routes/creditCards');
+const categoriesRoutes = require('./routes/categories');
+const obligationsRoutes = require('./routes/obligations');
+const subcategoriesRoutes = require('./routes/subcategories');
+const currenciesRoutes = require('./routes/currencies');
+const countriesRoutes = require('./routes/countries'); 
+const thirdPartiesRoutes = require('./routes/thirdParties'); 
+const transactionTypesRoutes = require('./routes/transactionTypes');
 
 const app = express();
 
@@ -32,9 +39,16 @@ app.use('/banksSMS', bankSMSRoutes);
 app.use('/institutions', institutionsRoutes);
 app.use('/institutionTypes', institutionTypesRoutes);
 app.use('/creditCards', creditCardsRoutes);
+app.use('/categories', categoriesRoutes);
+app.use('/obligations', obligationsRoutes);
+app.use('/subcategories', subcategoriesRoutes);
+app.use('/currencies', currenciesRoutes);
+app.use('/countries', countriesRoutes);
+app.use('/thirdParties', thirdPartiesRoutes);
+app.use('/transactionTypes', transactionTypesRoutes);
 
 // Sincronizar la base de datos y empezar el servidor
-sequelize.sync( {force: true} ).then(() => {
+sequelize.sync().then(() => {
     app.listen(3000, () => {
         console.log('Server is running on http://localhost:3000');
     });

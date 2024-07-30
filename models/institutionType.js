@@ -10,6 +10,10 @@ const InstitutionType = sequelize.define('InstitutionType', {
     institution_type_name: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    system_default: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     timestamps: true,

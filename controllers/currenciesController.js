@@ -2,9 +2,15 @@ const { Currency } = require('../models');
 
 exports.createCurrency = async (req, res) => {
     try {
-        const { currency_name, currency_symbol } = req.body;
-        const currency = await Currency.create({ currency_name, currency_symbol });
-        res.status(201).json(currency);
+        let currencies = req.body;
+
+        // Verificar si es un array o un objeto único
+        if (!Array.isArray(currencies)) {
+            currencies = [currencies];
+        }
+
+        const newCurrencies = await Currency.bulkCreate(currencies);
+        res.status(201).json(newCurrencies);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
