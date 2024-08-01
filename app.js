@@ -21,8 +21,10 @@ const currenciesRoutes = require('./routes/currencies');
 const countriesRoutes = require('./routes/countries'); 
 const thirdPartiesRoutes = require('./routes/thirdParties'); 
 const accountTypesRoutes = require('./routes/accountTypes');
-const goalsRoutes = require('./routes/goals');
 const accountsRoutes = require('./routes/accounts');
+const goalsRoutes = require('./routes/goals');
+const budgetDetailsRoutes = require('./routes/budgetDetails');
+const budgetsRoutes = require('./routes/budgets');
 const transactionTypesRoutes = require('./routes/transactionTypes');
 
 const app = express();
@@ -51,6 +53,8 @@ app.use('/thirdParties', thirdPartiesRoutes);
 app.use('/accountTypes', accountTypesRoutes);
 app.use('/accounts', accountsRoutes);
 app.use('/goals', goalsRoutes);
+app.use('/budgets',budgetsRoutes);
+app.use('/budgetDetails',budgetDetailsRoutes);
 app.use('/transactionTypes', transactionTypesRoutes);
 
 // Sincronizar la base de datos y empezar el servidor

@@ -11,6 +11,10 @@ const Budget = sequelize.define('Budget', {
         type: DataTypes.STRING,
         allowNull: false
     }
+}, {
+    timestamps: true,
+    tableName: 'Budget',
+    freezeTableName: true
 });
 
 module.exports = Budget;
