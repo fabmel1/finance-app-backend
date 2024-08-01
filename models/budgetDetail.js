@@ -11,9 +11,10 @@ const BudgetDetail = sequelize.define('BudgetDetail', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Budgets',
+            model: 'Budget',
             key: 'id_budget'
-        }
+        },
+        onDelete: 'CASCADE' 
     },
     id_subcategory: {
         type: DataTypes.INTEGER,
@@ -31,6 +32,10 @@ const BudgetDetail = sequelize.define('BudgetDetail', {
         type: DataTypes.STRING,
         allowNull: true
     }
+}, {
+    timestamps: true,
+    tableName: 'BudgetDetail',
+    freezeTableName: true
 });
 
 module.exports = BudgetDetail;

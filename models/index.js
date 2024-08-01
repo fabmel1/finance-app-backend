@@ -18,6 +18,8 @@ const ThirdParty = require('./thirdParty');
 const AccountType = require('./accountType');
 const Goal = require('./goal');
 const Account = require('./account');
+const Budget = require('./budget');
+const BudgetDetail = require('./budgetDetail');
 const Transaction = require('./transaction');
 
 // Definir relaciones
@@ -42,6 +44,9 @@ Institution.belongsTo(InstitutionType, { foreignKey: 'id_institution_type' });
 Institution.hasMany(CreditCard, { foreignKey: 'id_institution' });
 CreditCard.belongsTo(Institution, { foreignKey: 'id_institution' });
 
+Institution.hasMany(Account, { foreignKey: 'id_institution' });
+Account.belongsTo(Institution, { foreignKey: 'id_institution' });
+
 User.hasMany(CreditCard, { foreignKey: 'id_user' });
 CreditCard.belongsTo(User, { foreignKey: 'id_user' });
 
@@ -63,8 +68,14 @@ Account.belongsTo(AccountType, { foreignKey: 'id_account_type' });
 Currency.hasMany(Goal, { foreignKey: 'id_currency' });
 Goal.belongsTo(Currency, { foreignKey: 'id_currency' });
 
+Currency.hasMany(Account, { foreignKey: 'id_currency' });
+Account.belongsTo(Currency, { foreignKey: 'id_currency' });
+
 Goal.hasMany(Account, { foreignKey: 'id_goal' });
 Account.belongsTo(Goal, { foreignKey: 'id_goal' });
+
+Budget.hasMany(BudgetDetail, { foreignKey: 'id_budget', onDelete: 'CASCADE' });
+BudgetDetail.belongsTo(Budget, { foreignKey: 'id_budget' });
 
 ThirdParty.hasMany(Transaction, { foreignKey: 'id_third_party' });
 Transaction.belongsTo(ThirdParty, { foreignKey: 'id_third_party' });
@@ -98,5 +109,7 @@ module.exports = {
     Account,
     Goal,
     AccountType,
+    Budget,
+    BudgetDetail,
     Transaction
 };
