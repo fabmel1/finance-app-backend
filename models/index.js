@@ -14,10 +14,11 @@ const TransactionType = require('./transactionType');
 const Obligation = require('./obligation');
 const Currency = require('./currency');
 const Country = require('./country');
-const ThirdParty = require('./thirdParty')
+const ThirdParty = require('./thirdParty');
+const AccountType = require('./accountType');
+const Goal = require('./goal');
+const Account = require('./account');
 const Transaction = require('./transaction');
-
-
 
 // Definir relaciones
 User.hasOne(UserDetail, { foreignKey: 'id_user', onDelete: 'CASCADE' });
@@ -56,6 +57,15 @@ Transaction.belongsTo(TransactionType, { foreignKey: 'id_transaction_type' });
 Country.hasMany(Currency, { foreignKey: 'id_country' });
 Currency.belongsTo(Country, { foreignKey: 'id_country' });
 
+AccountType.hasMany(Account, { foreignKey: 'id_account_type' });
+Account.belongsTo(AccountType, { foreignKey: 'id_account_type' });
+
+Currency.hasMany(Goal, { foreignKey: 'id_currency' });
+Goal.belongsTo(Currency, { foreignKey: 'id_currency' });
+
+Goal.hasMany(Account, { foreignKey: 'id_goal' });
+Account.belongsTo(Goal, { foreignKey: 'id_goal' });
+
 ThirdParty.hasMany(Transaction, { foreignKey: 'id_third_party' });
 Transaction.belongsTo(ThirdParty, { foreignKey: 'id_third_party' });
 
@@ -67,6 +77,7 @@ sequelize.sync().then(() => {
     console.error('Unable to connect to the database:', error);
 });
 
+// Exportar modulos
 module.exports = {
     sequelize,
     User,
@@ -84,5 +95,8 @@ module.exports = {
     Currency,
     Country,
     ThirdParty,
+    Account,
+    Goal,
+    AccountType,
     Transaction
 };

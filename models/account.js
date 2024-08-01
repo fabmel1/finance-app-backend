@@ -65,11 +65,7 @@ const Account = sequelize.define('Account', {
     },
     id_goal: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'Goal',
-            key: 'id_goal'
-        }
+        allowNull: true
     }
 }, {
     timestamps: true,
