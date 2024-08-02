@@ -77,6 +77,9 @@ Account.belongsTo(Goal, { foreignKey: 'id_goal' });
 Budget.hasMany(BudgetDetail, { foreignKey: 'id_budget', onDelete: 'CASCADE' });
 BudgetDetail.belongsTo(Budget, { foreignKey: 'id_budget' });
 
+Subcategory.hasMany(BudgetDetail, { foreignKey: 'id_budget' });
+BudgetDetail.belongsTo(Subcategory, { foreignKey: 'id_budget' });
+
 ThirdParty.hasMany(Transaction, { foreignKey: 'id_third_party' });
 Transaction.belongsTo(ThirdParty, { foreignKey: 'id_third_party' });
 
