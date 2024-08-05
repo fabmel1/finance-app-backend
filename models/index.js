@@ -38,6 +38,9 @@ Obligation.belongsTo(User, { foreignKey: 'id_user' });
 User.hasMany(BankSMS, { foreignKey: 'id_user' });
 BankSMS.belongsTo(User, { foreignKey: 'id_user' });
 
+User.hasMany(Transaction, { foreignKey: 'id_user' });
+Transaction.belongsTo(User, { foreignKey: 'id_user' });
+
 InstitutionType.hasMany(Institution, { foreignKey: 'id_institution_type' });
 Institution.belongsTo(InstitutionType, { foreignKey: 'id_institution_type' });
 
@@ -76,6 +79,18 @@ Account.belongsTo(Goal, { foreignKey: 'id_goal' });
 
 Budget.hasMany(BudgetDetail, { foreignKey: 'id_budget', onDelete: 'CASCADE' });
 BudgetDetail.belongsTo(Budget, { foreignKey: 'id_budget' });
+
+Budget.hasMany(Transaction, { foreignKey: 'id_budget' });
+Transaction.belongsTo(Budget, { foreignKey: 'id_budget' });
+
+CreditCard.hasMany(Transaction, { foreignKey: 'id_credit_card' });
+Transaction.belongsTo(CreditCard, { foreignKey: 'id_credit_card' });
+
+Account.hasMany(Transaction, { foreignKey: 'id_account' });
+Transaction.belongsTo(Account, { foreignKey: 'id_account' });
+
+Obligation.hasMany(Transaction, { foreignKey: 'id_obligation' });
+Transaction.belongsTo(Obligation, { foreignKey: 'id_obligation' });
 
 Subcategory.hasMany(BudgetDetail, { foreignKey: 'id_budget' });
 BudgetDetail.belongsTo(Subcategory, { foreignKey: 'id_budget' });

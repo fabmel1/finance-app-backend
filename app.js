@@ -26,6 +26,7 @@ const goalsRoutes = require('./routes/goals');
 const budgetDetailsRoutes = require('./routes/budgetDetails');
 const budgetsRoutes = require('./routes/budgets');
 const transactionTypesRoutes = require('./routes/transactionTypes');
+const transactionsRoutes = require('./routes/transactions');
 
 const app = express();
 
@@ -56,6 +57,7 @@ app.use('/goals', goalsRoutes);
 app.use('/budgets',budgetsRoutes);
 app.use('/budgetDetails',budgetDetailsRoutes);
 app.use('/transactionTypes', transactionTypesRoutes);
+app.use('/transactions', transactionsRoutes);
 
 // Sincronizar la base de datos y empezar el servidor
 sequelize.sync().then(() => {
